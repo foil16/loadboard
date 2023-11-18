@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box; /* Ensures padding doesn't add to the width/height */
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .border-top {
@@ -15,7 +15,7 @@
 }
 
 .details-button {
-  position:relative;
+  position: relative;
   font-weight: bold;
   left: 83.4%;
   top: 35px;
@@ -70,7 +70,7 @@
 }
 
 .table-details::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -81,7 +81,8 @@
   z-index: -1; /* Ensure it's behind the content */
 }
 
-.vehicle-info-name, .vehicle-info-info {
+.vehicle-info-name,
+.vehicle-info-info {
   text-align: center;
   padding: 10px 15px;
   font-weight: bold;
@@ -97,19 +98,18 @@ th {
 }
 
 .available-loads::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url('C:\Users\ipman\Desktop\coding\loadboard\react\loadboard\public\images\trucks1.png');
+  background-image: ("react/loadboard/public/images/trucks1.png");
   background-position: center top;
   background-size: cover;
   filter: grayscale(1) blur(5px);
   z-index: -1;
 }
-
 
 .available-loads {
   position: relative;
@@ -122,7 +122,6 @@ th {
   border-radius: 15px;
 }
 
-
 .available-loads li {
   background-color: #ffffff;
   position: relative;
@@ -131,16 +130,17 @@ th {
   background-color: rgba(255, 255, 255, 0.8); /*80% opacity */
 }
 
-
-.available-loads ul, .notifications ul{
+.available-loads ul,
+.notifications ul {
   display: flex;
   flex-direction: column;
 }
 
-.available-loads li , .notifications li{
+.available-loads li,
+.notifications li {
   display: flex;
   flex-direction: row;
-  align-items: center; 
+  align-items: center;
   justify-content: space-between;
   vertical-align: center;
   width: 90%;
@@ -156,13 +156,13 @@ th {
 }
 
 .notifications::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url('C:\Users\ipman\Desktop\coding\loadboard\react\loadboard\public\images\trucks2.png');
+  background-image: ("react/loadboard/public/images/trucks2.png");
   background-position: center;
   background-size: cover;
   filter: grayscale(1) blur(5px);
@@ -180,7 +180,6 @@ th {
   border-radius: 15px;
 }
 
-
 .notifications li {
   width: 85%;
   position: relative;
@@ -189,20 +188,18 @@ th {
   color: #00b62a;
 }
 
-
-.available-loads h2, .notifications h2 {
+.available-loads h2,
+.notifications h2 {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 18px;
   color: #ffffff;
-  text-shadow: 
-  -1px -1px 0 #fba200,  
-   1px -1px 0 #fba200,
-  -1px  1px 0 #fba200,
-   1px  1px 0 #fba200; 
+  text-shadow: -1px -1px 0 #fba200, 1px -1px 0 #fba200, -1px 1px 0 #fba200,
+    1px 1px 0 #fba200;
 }
 
-.notifications li:hover, .available-loads li:hover {
+.notifications li:hover,
+.available-loads li:hover {
   background-color: #00b62a;
   color: #ffffff;
 }
@@ -212,11 +209,8 @@ th {
   margin-top: 20px;
   margin-bottom: 18px;
   color: #ffffff;
-  text-shadow: 
-  -1px -1px 0 #fba200,  
-   1px -1px 0 #fba200,
-  -1px  1px 0 #fba200,
-   1px  1px 0 #fba200; 
+  text-shadow: -1px -1px 0 #fba200, 1px -1px 0 #fba200, -1px 1px 0 #fba200,
+    1px 1px 0 #fba200;
 }
 
 .carriers {
@@ -228,11 +222,10 @@ th {
   border-radius: 15px;
 }
 
-
 .carriers li {
   display: flex;
   flex-direction: row;
-  align-items: center; 
+  align-items: center;
   justify-content: space-between;
   vertical-align: center;
   border: 2px solid black;
@@ -290,6 +283,3 @@ th {
 #search-button:hover {
   background-color: #4cae4c; /* Slightly darker shade for hover effect */
 }
-
-
-
