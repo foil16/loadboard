@@ -134,11 +134,19 @@ app.get("/truckers", async (req, res) => {
 });
 
 app.get("/trucker/:id", async (req, res) => {
-  const db = await ConnectDB();
+  const db = await connectDB();
+  const truckerId = parseInt(req.params.id, 10);
+
+  if (isNaN(truckerId)) {
+    return res.status(400).send("Invalid trucker ID");
+  }
   const trucker = await db
     .collection("truckers")
-    .findOne({ truckId: req.params.id }); //-------REVISE
+    .findOne({ truckId: truckerId });
   if (trucker) {
+    res.json(trucker);
+  } else {
+    res.status(404).send("Trucker not found");
   }
 });
 
