@@ -1,5 +1,6 @@
 import Navigation from "../components/navbar";
 import Searchbar from "../components/search";
+import RealTimeTable from "../components/table";
 
 function Home() {
     return (
@@ -12,112 +13,8 @@ function Home() {
     <div class="select-trucker">
         <Searchbar/>
     </div>
-
-<div class="carriers">
-
-      <ul>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            <li>
-                <span>ID</span>
-                <span>Type</span>
-                <span>Location</span>
-                <span>Time</span>
-            </li>
-            
-
-      </ul>
-
-        </div>
-      </div>
+    <RealTimeTable/>
+    </div>
     );
   }
   
