@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Navigation from "../components/navbar";
 import TableLoad from "../components/tableload";
+import TableNotif from "../components/tablenotifs";
 
 function Truckers() {
   useEffect(() => {
@@ -125,65 +126,7 @@ function Truckers() {
       </div>
 
       <div class="notifications">
-        <h2>Notifications</h2>
-        <ul>
-          <li>
-            <span>ID</span>
-            <span>Price</span>
-            <span>Origin</span>
-            <span>Destination</span>
-            <span>Time</span>
-          </li>
-          <li>
-            <span>id#1</span>
-            <span>price#1</span>
-            <span>origin#1</span>
-            <span>destination#1</span>
-            <span>time#1</span>
-          </li>
-          <li>
-            <span>id#2</span>
-            <span>price#2</span>
-            <span>origin#2</span>
-            <span>destination#2</span>
-            <span>time#2</span>
-          </li>
-          <li>
-            <span>id#3</span>
-            <span>price#3</span>
-            <span>origin#3</span>
-            <span>destination#3</span>
-            <span>time#3</span>
-          </li>
-          <li>
-            <span>id#3</span>
-            <span>price#3</span>
-            <span>origin#3</span>
-            <span>destination#3</span>
-            <span>time#3</span>
-          </li>
-          <li>
-            <span>id#3</span>
-            <span>price#3</span>
-            <span>origin#3</span>
-            <span>destination#3</span>
-            <span>time#3</span>
-          </li>
-          <li>
-            <span>id#3</span>
-            <span>price#3</span>
-            <span>origin#3</span>
-            <span>destination#3</span>
-            <span>time#3</span>
-          </li>
-          <li>
-            <span>id#3</span>
-            <span>price#3</span>
-            <span>origin#3</span>
-            <span>destination#3</span>
-            <span>time#3</span>
-          </li>
-        </ul>
+        <TableNotif/>
       </div>
     </div>
   );
