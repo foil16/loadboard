@@ -146,6 +146,7 @@ mqttClient.on("message", async (topic, message) => {
     //await collection.insertOne(data);
   } else if (data.type === "End") {
     console.log("End of day detected");
+    broadcastEndofDay(data);
     await collectiont.deleteMany({});
     await collectionl.deleteMany({});
     await collectionn.deleteMany({});
@@ -269,14 +270,18 @@ wss.on("connection", function connection(ws) {
   });
 });
 
-server.listen(5000, function () {
+server.listen(4001, function () {
   console.log("Server is listening on port 5000");
 });
 
 function boradcastNewTrucker(trucker) {
   wss.clients.forEach(function each(client) {
-    if ((client, readyState === WebSocket.OPEN)) {
-      client.send(JSON.stringify(trucker));
-    }
+    client.send(JSON.stringify(trucker));
+  });
+}
+
+function broadcastEndofDay(end) {
+  wss.clients.forEach(function each(client) {
+    client.send(JSON.stringify("End"));
   });
 }
