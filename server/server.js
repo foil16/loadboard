@@ -66,13 +66,31 @@ mqttClient.on("connect", async () => {
   });
 });
 
-let started = false;
+let started = true;
 let db = null;
 let collectionl = null;
 let collectiont = null;
 let collectionvan = null;
 let collectionreefer = null;
 let collectionflatbed = null;
+
+function getDistance(lat1, lon1, lat2, lon2) {
+  R = 3958.8;
+  const phi1 = (lat1 * Math.PI) / 180;
+  const phi2 = (lat2 * Math.PI) / 180;
+  const deltaphi = ((lat2 - lat1) * Math.PI) / 180;
+  const deltalambda = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(deltaphi / 2) * Math.sin(deltaphi / 2) +
+    Math.cos(phi1) *
+      Math.cos(phi2) *
+      Math.sin(deltalambda / 2) *
+      Math.sin(deltalambda / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
 
 async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
   const query = { equipType: load.equipmentType };
@@ -84,8 +102,19 @@ async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
   } else {
     pref = "Long";
   }
-  const relevantTruckers = relevantTruckersTemp.filter((trucker) => {
+  const relevantTruckersTemp1 = relevantTruckersTemp.filter((trucker) => {
     return trucker.nextTripLengthPreference === pref;
+  });
+
+  const relevantTruckers = relevantTruckersTemp1.filter((trucker) => {
+    return (
+      getDistance(
+        trucker.positionLatitude,
+        trucker.positionLongitude,
+        load.originLatitude,
+        load.originLongitude
+      ) <= 100
+    );
   });
   return relevantTruckers;
 }
@@ -114,12 +143,13 @@ mqttClient.on("message", async (topic, message) => {
     // collectiont = db.collection('truckers');
     // collectionl = db.collection('loads');
 
-    console.log("Deleted previous day");
     //await collection.insertOne(data);
   } else if (data.type === "End") {
     console.log("End of day detected");
     await collectiont.deleteMany({});
     await collectionl.deleteMany({});
+    await collectionn.deleteMany({});
+    console.log("Deleted previous day");
     //await collection.insertOne(data);
     //mqttClient.unsubscribe('CodeJam');
     //mqttClient.end();
@@ -132,6 +162,7 @@ mqttClient.on("message", async (topic, message) => {
       const update = { $set: data };
       const options = { upsert: true };
       await collectiont.findOneAndUpdate(query, update, options);
+      boradcastNewTrucker(data);
       console.log("Trucker info added or updated");
     }
     if (data.type === "Load") {
@@ -218,3 +249,34 @@ app.get("/load/:id", async (req, res) => {
 //notifications
 //
 //app.get("/")
+//__________________________________________websocket
+
+const WebSocket = require("ws");
+const http = require("http");
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+wss.on("connection", function connection(ws) {
+  console.log("New socket connection");
+
+  ws.on("message", function incoming(message) {
+    console.log("received: %s", message);
+  });
+
+  ws.on("close", function close() {
+    console.log("Client disconnected");
+  });
+});
+
+server.listen(5000, function () {
+  console.log("Server is listening on port 5000");
+});
+
+function boradcastNewTrucker(trucker) {
+  wss.clients.forEach(function each(client) {
+    if ((client, readyState === WebSocket.OPEN)) {
+      client.send(JSON.stringify(trucker));
+    }
+  });
+}
