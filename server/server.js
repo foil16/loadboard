@@ -302,6 +302,10 @@ wss2.on("connection", function connection(ws) {
   });
 });
 
+server2.listen(4002, function () {
+  console.log("Server is listening on port 4002");
+});
+
 function broadcastNewLoad(load) {
   wss2.clients.forEach(function each(client) {
     client.send(JSON.stringify(load));
