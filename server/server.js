@@ -70,6 +70,34 @@ let started = false;
 let db = null;
 let collectionl = null;
 let collectiont = null;
+let collectionvan = null;
+let collectionreefer = null;
+let collectionflatbed = null;
+
+async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
+  const query = { equipType: load.equipmentType };
+  const relevantTruckersTemp = await truckers.find(query).toArray();
+  const mileage = load.mileage;
+  let pref = null;
+  if (mileage < 200) {
+    pref = "Short";
+  } else {
+    pref = "Long";
+  }
+  const relevantTruckers = relevantTruckersTemp.filter((trucker) => {
+    return trucker.nextTripLengthPreference === pref;
+  });
+  return relevantTruckers;
+}
+
+async function uploadNotification(loadIdi, truckerIdi, notifications) {
+  const notification = {
+    loadId: loadIdi,
+    truckerId: truckerIdi,
+  };
+  notifications.insertOne(notification);
+  console.log("Trucker notified");
+}
 
 mqttClient.on("message", async (topic, message) => {
   const data = JSON.parse(message.toString());
@@ -77,6 +105,7 @@ mqttClient.on("message", async (topic, message) => {
   db = await connectDB();
   collectiont = db.collection("truckers");
   collectionl = db.collection("loads");
+  collectionn = db.collection("notifications");
 
   if (data.type === "Start") {
     console.log("New day detected");
@@ -107,9 +136,19 @@ mqttClient.on("message", async (topic, message) => {
     }
     if (data.type === "Load") {
       await collectionl.insertOne(data);
+      loadId = data.loadId;
+      const relevantTruckers = await getRelevantTruckersForLoad(
+        data,
+        db,
+        collectiont,
+        collectionn
+      );
+      relevantTruckers.forEach((trucker) => {
+        uploadNotification(loadId, trucker.truckId, collectionn);
+      });
     }
     //await collection.insertOne(data);
-    console.log("Info added to DB");
+    console.log("Load added to DB");
   }
 
   // await collection.insertOne(data);
@@ -123,7 +162,7 @@ mqttClient.on("message", async (topic, message) => {
 //________________________________API
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 4000;
 
 app.use(express.json());
 
@@ -158,6 +197,24 @@ app.get("/trucker/:id", async (req, res) => {
 //loads
 app.get("/loads", async (req, res) => {
   const db = await connectDB();
-  const truckers = await db.collection("truckers").find({}).toArray();
+  const truckers = await db.collection("loads").find({}).toArray();
   res.json(truckers);
 });
+
+app.get("/load/:id", async (req, res) => {
+  const db = await connectDB();
+  const loadId = parseInt(req.params.id, 10);
+  if (isNaN(loadId)) {
+    return res.status(400).send("Invalid load ID");
+  }
+  const load = await db.collection("loads").findOne({ loadId: loadId });
+  if (load) {
+    res.json(load);
+  } else {
+    res.status(404).send("Load not found");
+  }
+});
+
+//notifications
+//
+//app.get("/")
