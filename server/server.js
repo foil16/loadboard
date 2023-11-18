@@ -45,7 +45,7 @@ const mqttClient = mqtt.connect("mqtt://fortuitous-welder.cloudmqtt.com", {
   password: "REDACTED",
   cleanSession: true,
   //   QoS: 1,
-  clientId: "5head",
+  clientId: "5headkevin",
   //   Topic: "CodeJam"
 });
 
