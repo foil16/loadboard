@@ -1,38 +1,294 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding doesn't add to the width/height */
+  font-family: 'Open Sans', sans-serif;
+}
+
+.border-top {
+  border: 1px solid rgb(199, 199, 199);
+  margin-top: 70px;
+}
+
+.top-background {
+  background-color: #ffffff;
+}
+
+.details-button {
+  position:relative;
+  font-weight: bold;
+  left: 83.4%;
+  top: 35px;
+  width: 190px;
+  height: 35px;
+  font-size: 20px;
+  border-radius: 10px;
+  color: white;
+  background-color: #00b62a;
+}
+
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 999;
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 1002; /* Higher than the popup content */
+  position: absolute; /* Ensure it's positioned relative to the popup */
+  left: 470px;
+}
+
+.details-button:hover {
+  background-color: #00a727;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #00a727;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.table-details {
+  position: fixed;
+  border: 3px solid black;
+  width: 500px;
+  height: 350px;
+  margin: auto;
+  border-radius: 10px;
+  z-index: 1000;
+  cursor: move;
+  overflow: hidden; /* Hide overflow from pseudo-element */
+}
+
+.table-details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f9f9f9d3;
+  filter: blur(5px);
+  z-index: -1; /* Ensure it's behind the content */
+}
+
+.vehicle-info-name, .vehicle-info-info {
   text-align: center;
+  padding: 10px 15px;
+  font-weight: bold;
+  position: relative;
+  z-index: 1; /* Above the pseudo-element */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Additional styling for headers if applicable */
+th {
+  color: black;
+  text-align: center;
+  padding: 12px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.available-loads::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('C:\Users\ipman\Desktop\coding\loadboard\react\loadboard\public\images\trucks1.png');
+  background-position: center top;
+  background-size: cover;
+  filter: grayscale(1) blur(5px);
+  z-index: -1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.available-loads {
+  position: relative;
+  top: 25px;
+  left: 50px;
+  border: 2px solid black;
+  height: 625px;
+  width: 50%;
+  overflow-y: scroll; /* Add vertical scrollbar when content overflows */
+  border-radius: 15px;
+}
+
+
+.available-loads li {
+  background-color: #ffffff;
+  position: relative;
+  z-index: 2; /* Higher than the pseudo-element */
+  color: #00b62a;
+  background-color: rgba(255, 255, 255, 0.8); /*80% opacity */
+}
+
+
+.available-loads ul, .notifications ul{
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.available-loads li , .notifications li{
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: space-between;
+  vertical-align: center;
+  width: 90%;
+  border: 2px solid black;
+  margin-top: 5px;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+  overflow-x: auto;
+}
+
+.notifications::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('C:\Users\ipman\Desktop\coding\loadboard\react\loadboard\public\images\trucks2.png');
+  background-position: center;
+  background-size: cover;
+  filter: grayscale(1) blur(5px);
+  z-index: -1;
+}
+
+.notifications {
+  position: relative;
+  bottom: 600px;
+  left: 815px;
+  border: 2px solid black;
+  height: 625px;
+  width: 40%;
+  overflow-y: scroll; /* Add vertical scrollbar when content overflows */
+  border-radius: 15px;
+}
+
+
+.notifications li {
+  width: 85%;
+  position: relative;
+  z-index: 2; /* Ensure higher than the pseudo-element */
+  background-color: rgba(255, 255, 255, 0.8); /*80% opacity */
+  color: #00b62a;
+}
+
+
+.available-loads h2, .notifications h2 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 18px;
+  color: #ffffff;
+  text-shadow: 
+  -1px -1px 0 #fba200,  
+   1px -1px 0 #fba200,
+  -1px  1px 0 #fba200,
+   1px  1px 0 #fba200; 
+}
+
+.notifications li:hover, .available-loads li:hover {
+  background-color: #00b62a;
+  color: #ffffff;
+}
+
+.carriers h2 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 18px;
+  color: #ffffff;
+  text-shadow: 
+  -1px -1px 0 #fba200,  
+   1px -1px 0 #fba200,
+  -1px  1px 0 #fba200,
+   1px  1px 0 #fba200; 
+}
+
+.carriers {
+  position: relative;
+  top: 2rem;
+  height: 430px;
+  width: 100%;
+  overflow-y: scroll; /* Add vertical scrollbar when content overflows */
+  border-radius: 15px;
+}
+
+
+.carriers li {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: space-between;
+  vertical-align: center;
+  border: 2px solid black;
+  margin-top: 5px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+  overflow-x: auto;
+  width: 85%;
+  position: relative;
+  z-index: 2; /* Ensure higher than the pseudo-element */
+  background-color: rgba(255, 255, 255, 0.8); /*80% opacity */
+  color: #00b62a;
+}
+
+.slogan {
+  text-align: center;
+  font-size: 35px;
+  margin-top: 10%;
+  margin-bottom: -15%;
+}
+
+.select-trucker {
+  /* Align the search bar and button horizontally */
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  padding: 10px;
+  margin-top: 17%;
+  margin-bottom: 0;
+}
+
+#select-trucker {
+  padding: 10px;
+  margin-right: 5px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 250px; /* Or any desired width */
+}
+
+#search-button {
+  padding: 10px 20px;
+  background-color: #5cb85c;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+#search-button:hover {
+  background-color: #4cae4c; /* Slightly darker shade for hover effect */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
