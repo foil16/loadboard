@@ -92,29 +92,6 @@ function getDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-function getRoadDistance(startLong, startLat, endLong, endLat) {
-  return fetch("http://localhost:8080/ors/v2/directions/driving-hgv", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-    },
-    body: JSON.stringify({
-      coordinates: [
-        [startLong, startLat], // Start coordinates
-        [endLong, endLat], // End coordinates
-      ],
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      return data.routes[0].summary.distance; // Return the distance
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      return null; // Return null in case of an error
-    });
-}
-
 async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
   const query = { equipType: load.equipmentType };
   const relevantTruckersTemp = await truckers.find(query).toArray();
@@ -129,18 +106,7 @@ async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
     return trucker.nextTripLengthPreference === pref;
   });
 
-  // relevantTruckersTemp1.forEach((trucker) => {
-  //   const fs = require("fs");
-  //   const distance = getRoadDistance(
-  //     trucker.positionLatitude,
-  //     trucker.positionLongitude,
-  //     load.originLatitude,
-  //     load.originLongitude
-  //   );
-  //   fs.appendFileSync("distances.txt", distance.toString());
-  // });
-
-  const relevantTruckers = relevantTruckersTemp1.filter((trucker) => {
+  const relevantTruckersTemp2 = relevantTruckersTemp1.filter((trucker) => {
     return (
       getDistance(
         trucker.positionLatitude,
@@ -150,6 +116,40 @@ async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
       ) <= 100
     );
   });
+  // const distance1 = getDistance(
+  //   trucker.positionLatitude,
+  //   trucker.positionLongitude,
+  //   load.originLatitude,
+  //   load.originLongitude
+  // );
+  // const timetravelled = (distance1 * 1.35 + load.mileage) * 1.2;
+  // const estimatedsalary = timetravelled * 30;
+
+  const relevantTruckers = relevantTruckersTemp2.filter((trucker) => {
+    return (
+      load.price -
+        (getDistance(
+          trucker.positionLatitude,
+          trucker.positionLongitude,
+          load.originLatitude,
+          load.originLongitude
+        ) *
+          1.35 +
+          load.mileage) *
+          1.38 >=
+      (getDistance(
+        trucker.positionLatitude,
+        trucker.positionLongitude,
+        load.originLatitude,
+        load.originLongitude
+      ) *
+        1.35 +
+        load.mileage) *
+        1.2 *
+        30
+    );
+  });
+
   return relevantTruckers;
 }
 
