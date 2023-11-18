@@ -288,7 +288,7 @@ function broadcastEndofDay(end) {
 }
 
 const server2 = http.createServer(app);
-const wss2 = new WebSocket.Server({ server });
+const wss2 = new WebSocket.Server({ server2 });
 
 wss2.on("connection", function connection(ws) {
   console.log("New socket connection");
@@ -313,7 +313,7 @@ function broadcastNewLoad(load) {
 }
 
 const server3 = http.createServer(app);
-const wss3 = new WebSocket.Server({ server });
+const wss3 = new WebSocket.Server({ server3 });
 
 wss3.on("connection", function connection(ws) {
   console.log("New socket connection");
