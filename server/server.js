@@ -125,6 +125,7 @@ async function uploadNotification(loadIdi, truckerIdi, notifications) {
     truckerId: truckerIdi,
   };
   notifications.insertOne(notification);
+  broadcastNotifications(notification);
   console.log("Trucker notified");
 }
 
@@ -287,46 +288,14 @@ function broadcastEndofDay(end) {
   });
 }
 
-const server2 = http.createServer(app);
-const wss2 = new WebSocket.Server({ server2 });
-
-wss2.on("connection", function connection(ws) {
-  console.log("New socket connection");
-
-  ws.on("message", function incoming(message) {
-    console.log("received: %s", message);
-  });
-
-  ws.on("close", function close() {
-    console.log("Client disconnected");
-  });
-});
-
-server2.listen(4002, function () {
-  console.log("Server is listening on port 4002");
-});
-
 function broadcastNewLoad(load) {
-  wss2.clients.forEach(function each(client) {
+  wss.clients.forEach(function each(client) {
     client.send(JSON.stringify(load));
   });
 }
 
-const server3 = http.createServer(app);
-const wss3 = new WebSocket.Server({ server3 });
-
-wss3.on("connection", function connection(ws) {
-  console.log("New socket connection");
-
-  ws.on("message", function incoming(message) {
-    console.log("received: %s", message);
+function broadcastNotifications(notification) {
+  wss.clients.forEach(function each(client) {
+    client.send(JSON.stringify(notification));
   });
-
-  ws.on("close", function close() {
-    console.log("Client disconnected");
-  });
-});
-
-server3.listen(4003, function () {
-  console.log("Server is listening on port 4003");
-});
+}
