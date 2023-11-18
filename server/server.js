@@ -125,32 +125,7 @@ async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
   // const timetravelled = (distance1 * 1.35 + load.mileage) * 1.2;
   // const estimatedsalary = timetravelled * 30;
 
-  const relevantTruckers = relevantTruckersTemp2.filter((trucker) => {
-    return (
-      load.price -
-        (getDistance(
-          trucker.positionLatitude,
-          trucker.positionLongitude,
-          load.originLatitude,
-          load.originLongitude
-        ) *
-          1.35 +
-          load.mileage) *
-          1.38 >=
-      (getDistance(
-        trucker.positionLatitude,
-        trucker.positionLongitude,
-        load.originLatitude,
-        load.originLongitude
-      ) *
-        1.35 +
-        load.mileage) *
-        1.2 *
-        30
-    );
-  });
-
-  return relevantTruckers;
+  return relevantTruckersTemp2;
 }
 
 async function uploadNotification(loadIdi, truckerIdi, notifications) {
