@@ -1,7 +1,7 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 
 function Navigation({ color }) {
   return (
@@ -12,13 +12,15 @@ function Navigation({ color }) {
             href="/"
             style={{
               color: color,
-              fontSize: '30px',
+              fontSize: "30px",
               padding: "0",
               margin: "0",
-              textAlign: 'center',
-              fontFamily:"times-new-roman"
+              textAlign: "center",
+              fontFamily: "times-new-roman",
             }}
-          > Bhay Nom
+          >
+            {" "}
+            5-head
           </Navbar.Brand>
         </Container>
       </Navbar>
