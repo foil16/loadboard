@@ -19,11 +19,13 @@ const TableNotif = () => {
         const messageData = JSON.parse(event.data);
         console.log(messageData);
         if (messageData.type === "Notification" || messageData.type === "End") {
+          //console.log("NOTIFICITATIONTNTNTIENIENEWOFIEWUOFWOUFGNOWGWJEGB");
           console.log("Message received:", messageData);
           if (messageData.type === "End") {
             console.log("End of day detected");
             setData([]); // Clear the data
-          } else if (messageData.truckId === truckId){
+          } else if (messageData.truckerId.toString() === truckId.toString()){
+            console.log("WE IN!ejfwegiuweoifhwioefjwoepfoewfioewhfowbeofnew")
             setData((prevData) => [...prevData, messageData]);
           }
         }
@@ -71,7 +73,7 @@ const TableNotif = () => {
                   onClick={() => handleRowClick(item.truckId)}
                 >
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {item.truckId}
+                    {item.truckerId}
                   </td>
                   <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
                     {item.loadId}
