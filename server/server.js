@@ -98,7 +98,12 @@ mqttClient.on("message", async (topic, message) => {
     started = false;
   } else if (started) {
     if (data.type === "Truck") {
-      await collectiont.insertOne(data);
+      const truckIds = parseInt(data.truckId, 10);
+      const query = { truckId: truckIds };
+      const update = { $set: data };
+      const options = { upsert: true };
+      await collectiont.findOneAndUpdate(query, update, options);
+      console.log("Trucker info added or updated");
     }
     if (data.type === "Load") {
       await collectionl.insertOne(data);
