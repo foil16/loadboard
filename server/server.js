@@ -125,7 +125,7 @@ async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
   // const timetravelled = (distance1 * 1.35 + load.mileage) * 1.2;
   // const estimatedsalary = timetravelled * 30;
 
-  return relevantTruckersTemp2;
+  return relevantTruckersTemp;
 }
 
 async function uploadNotification(loadIdi, truckerIdi, notifications) {
