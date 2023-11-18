@@ -282,6 +282,6 @@ function boradcastNewTrucker(trucker) {
 
 function broadcastEndofDay(end) {
   wss.clients.forEach(function each(client) {
-    client.send(JSON.stringify("End"));
+    client.send(JSON.stringify(end));
   });
 }
