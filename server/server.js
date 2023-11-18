@@ -175,6 +175,7 @@ mqttClient.on("message", async (topic, message) => {
         collectiont,
         collectionn
       );
+      broadcastNewLoad(data);
       relevantTruckers.forEach((trucker) => {
         uploadNotification(loadId, trucker.truckId, collectionn);
       });
@@ -271,7 +272,7 @@ wss.on("connection", function connection(ws) {
 });
 
 server.listen(4001, function () {
-  console.log("Server is listening on port 5000");
+  console.log("Server is listening on port 4001");
 });
 
 function boradcastNewTrucker(trucker) {
@@ -283,5 +284,26 @@ function boradcastNewTrucker(trucker) {
 function broadcastEndofDay(end) {
   wss.clients.forEach(function each(client) {
     client.send(JSON.stringify(end));
+  });
+}
+
+const server2 = http.createServer(app);
+const wss2 = new WebSocket.Server({ server });
+
+wss2.on("connection", function connection(ws) {
+  console.log("New socket connection");
+
+  ws.on("message", function incoming(message) {
+    console.log("received: %s", message);
+  });
+
+  ws.on("close", function close() {
+    console.log("Client disconnected");
+  });
+});
+
+function broadcastNewLoad(load) {
+  wss2.clients.forEach(function each(client) {
+    client.send(JSON.stringify(load));
   });
 }
