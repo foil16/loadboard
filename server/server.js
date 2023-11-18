@@ -311,3 +311,22 @@ function broadcastNewLoad(load) {
     client.send(JSON.stringify(load));
   });
 }
+
+const server3 = http.createServer(app);
+const wss3 = new WebSocket.Server({ server });
+
+wss3.on("connection", function connection(ws) {
+  console.log("New socket connection");
+
+  ws.on("message", function incoming(message) {
+    console.log("received: %s", message);
+  });
+
+  ws.on("close", function close() {
+    console.log("Client disconnected");
+  });
+});
+
+server3.listen(4003, function () {
+  console.log("Server is listening on port 4003");
+});
