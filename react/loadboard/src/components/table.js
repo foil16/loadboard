@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
 
-const RealTimeTable = () => {
+const RealTimeTable = ({ onTruckSelect }) => {
   const [data, setData] = useState([]);
-  const navigate = useNavigate(); // Initialize navigate function
-
+  
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:4001/");
 
@@ -41,48 +39,47 @@ const RealTimeTable = () => {
   }, []);
 
   const handleRowClick = (truckId) => {
-    navigate(`/truckers/${truckId}`); // Navigate to truckers route with truckId parameter
+    onTruckSelect(truckId);
   };
 
   return (
     <div className="carriers">
       <body className="body-select-trucker">
-        <h2>Real-Time Truck Data</h2>
         <div>
           <table>
             <thead>
               <tr>
-                <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+                <th className="carrier-table-head">
                   Truck ID
                 </th>
-                <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+                <th className="carrier-table-head">
                   Type
                 </th>
-                <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+                <th className="carrier-table-head">
                   Latitude
                 </th>
-                <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+                <th className="carrier-table-head">
                   Longitude
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
-              {data.map((item) => (
+            <tbody>
+            {data.map((item) => (
                 <tr
-                  key={item._id || item.truckId}
-                  className="hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleRowClick(item.truckId)}
-                >
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                key={item._id || item.truckId}
+                className="hover:bg-gray-100 cursor-pointer"
+                onClick={() => onTruckSelect(item.truckId)}
+              >
+                  <td className="newCarrier">
                     {item.truckId}
                   </td>
-                  <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
+                  <td className="newCarrier">
                     {item.equipType}
                   </td>
-                  <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
+                  <td className="newCarrier">
                     {item.positionLatitude}
                   </td>
-                  <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
+                  <td className="newCarrier">
                     {item.positionLongitude}
                   </td>
                 </tr>
