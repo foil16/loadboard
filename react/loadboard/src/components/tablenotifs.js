@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const TableNotif = ({ truckId }) => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
+    // WebSocket connection setup
     const socket = new WebSocket("ws://localhost:4001/");
 
     socket.onopen = () => {
       console.log("WebSocket connection established");
+      // Optionally, if your backend supports it, send a message to the server
+      // to subscribe only to notifications for the selected truckId
+      socket.send(JSON.stringify({ action: "subscribe", truckId: truckId }));
     };
 
     socket.onmessage = (event) => {
       try {
-        const messageData = JSON.parse(event.data);
-        if (messageData.type === "Notification") {
-          // Check if the notification's truckId matches the passed truckId
-          if (messageData.truckerId === truckId) {
-            setNotifications((prevNotifications) => [...prevNotifications, messageData]);
-          }
-        } else if (messageData.type === "End") {
-          setNotifications([]); // Clear the data if it's the end of the day
+        const message = JSON.parse(event.data);
+        // Filter out messages that are not notifications or don't match the truckId
+        if (message.type === "Notification" && message.truckId.toString() === truckId) {
+          setNotifications((prevNotifications) => [...prevNotifications, message]);
         }
       } catch (error) {
         console.error("Error parsing message data:", error);
@@ -30,16 +30,15 @@ const TableNotif = ({ truckId }) => {
       console.error("WebSocket Error:", error);
     };
 
-    // Clean up the WebSocket connection when the component unmounts or truckId changes
+    // Clean up the WebSocket connection when the component unmounts
     return () => {
-      console.log("Closing WebSocket connection");
       socket.close();
     };
-  }, [truckId]); // Depend on truckId so that the effect runs again if truckId changes
+  }, [truckId]); // This effect should run when truckId changes
 
   return (
-    <div className="carriers">
-      <h2>Notifications</h2>
+    <div>
+      <h2>Notifications for Truck ID: {truckId}</h2>
       <table>
         <thead>
           <tr>
@@ -48,10 +47,10 @@ const TableNotif = ({ truckId }) => {
           </tr>
         </thead>
         <tbody>
-          {notifications.map((notif, index) => (
-            <tr key={notif._id || index}> {/* Use notif._id if available for uniqueness */}
-              <td>{notif.truckerId}</td>
-              <td>{notif.loadId}</td>
+          {notifications.map((notification, index) => (
+            <tr key={index}>
+              <td>{notification.truckId}</td>
+              <td>{notification.loadId}</td>
             </tr>
           ))}
         </tbody>
