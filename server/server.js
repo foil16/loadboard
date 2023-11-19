@@ -273,7 +273,7 @@ mqttClient.on("message", async (topic, message) => {
         collectionn
       );
 
-      console.log(relevantTruckers);
+      //console.log(relevantTruckers);
       broadcastNewLoad(data);
       relevantTruckers.forEach((trucker) => {
         const msg = calcScore(trucker, data);
