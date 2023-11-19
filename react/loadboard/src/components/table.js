@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Navigation from "./navbar";
 
 const RealTimeTable = ({ onTruckSelect }) => {
   const [data, setData] = useState([]);
@@ -42,9 +43,14 @@ const RealTimeTable = ({ onTruckSelect }) => {
     onTruckSelect(truckId);
   };
 
+
   return (
+
+    <div className="bgimage">
+      <Navigation></Navigation>
     <div className="carriers">
       <body className="body-select-trucker">
+
         <div>
           <table>
             <thead>
@@ -65,8 +71,11 @@ const RealTimeTable = ({ onTruckSelect }) => {
             </thead>
             <tbody>
             {data.map((item) => (
-              <tr key={item._id || item.truckId} onClick={() => handleRowClick(item.truckId)}>
-                {/* ... */}
+                <tr
+                key={item._id || item.truckId}
+                className="hover:bg-gray-100 cursor-pointer"
+                onClick={() => onTruckSelect(item.truckId)}
+              >
                   <td className="newCarrier">
                     {item.truckId}
                   </td>
@@ -85,6 +94,7 @@ const RealTimeTable = ({ onTruckSelect }) => {
           </table>
         </div>
       </body>
+    </div>
     </div>
   );
 };

@@ -90,11 +90,8 @@
 
 .caption-for-available-table {
   position: relative;
-  left: 320px;
-  top: 100px;
+  left: -35px;
   font-weight: bold;
-  font-size: 25px;
-  color: black;
 }
 
 .temp-available {
@@ -102,94 +99,32 @@
   position: relative;
   left: 70px;
   top: 100px;
-  height: 600px;
+  height: 300px;
   overflow-y: auto;
   text-align: center;
-  background-color: white; /* Assuming the table container's background is white */
-  padding-bottom: 10px; /* Add padding to contain the shadows */
 }
 
 .available-loads-table {
-  width: 98%;
-  margin-left: 0;
-  border-collapse: separate; /* Ensures that the cells have space for the box-shadow */
-  border-spacing: 0; /* Removes the default spacing between cells */
-}
-
-.available-loads-table thead {
-  height: 60%;
-  background-color: #000000;
-  color: #ffffff;
-}
-
-.available-loads-table thead th {
-  position: sticky;
-  top: 0; /* This ensures the header sticks to the top of the table scroll area */
-  z-index: 10; /* This ensures the header stays on top of other content when scrolling */
-  background-color: #000000; /* Reapply background color to ensure readability */
-  color: #ffffff;
-}
-
-.available-loads-table td th {
-  padding-top: 5px; /* Space on top of cell content */
-  padding-bottom: 5px; /* Space on bottom of cell content */
-}
-
-.help2,
-.help1 {
-  border: 2px solid black;
-  background-clip: padding-box; /* Prevents background from spilling into the box-shadow */
-  height: 60px;
-  transition: transform 0.3s ease, border-width 0.3s ease;
-}
-
-.help1 {
-  height: 50px;
-}
-
-/* If the table background isn't white, match the box-shadow color to the actual background */
-.temp-available {
-  background-color: white; /* Assuming the table container's background is white */
-}
-
-.help2:hover {
-  color: #00b62a; /* Your existing hover text color */
-  transform: scale(1.05); /* Scales the row to 105% of its original size */
-  transition: transform 0.3s ease; /* Smooth transition for the transform effect */
-  border-width: 3px; /* Increase the border width when hovered */
-}
-
-.available-loads-table td,
-.available-loads-table th {
-  padding-top: 5px; /* Space on top of cell content */
-  padding-bottom: 5px; /* Space on bottom of cell content */
-  /* Add padding to the left and right to ensure content does not touch the borders */
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.notifications ul {
-  display: flex;
-  flex-direction: column;
-}
-
-.notifications li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  vertical-align: center;
   width: 90%;
-  border: 2px solid black;
-  margin-top: 5px;
-  height: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
-  overflow-x: auto;
 }
+
+.available-loads-tabletd th,
+.available-loads-tabletd td {
+  padding-top: 5px; /* Space on top of cell content */
+  padding-bottom: 5px; /* Space on bottom of cell content */
+}
+
+.help {
+  border: 2px solid black;
+}
+
+.help:hover {
+  background-color: rgb(182, 182, 182);
+  color: blue;
+}
+
+
+
 
 .notifications::before {
   content: "";
@@ -205,7 +140,7 @@
   z-index: -1;
 }
 
-.notifications {
+.rt-notifs {
   position: relative;
   top: -575px;
   bottom: 600px;
@@ -213,29 +148,17 @@
   border: 2px solid black;
   height: 625px;
   width: 40%;
-  overflow-y: scroll;
+  overflow-y: scroll; 
   border-radius: 15px;
+  border: 2px solid black;
 }
 
-.notifications li {
-  width: 85%;
-  position: relative;
-  z-index: 2;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #00b62a;
-}
-
-.notifications li:hover,
-.available-loads li:hover {
-  background-color: #00b62a;
-  color: #ffffff;
-}
 
 .bgimage {
   position: relative;
-  min-height: 100vh;
-  z-index: 1;
+  min-height: 110vh; 
   overflow: hidden;
+  z-index: 1;
 }
 
 .bgimage::before {
@@ -245,23 +168,34 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: ("react/loadboard/public/images/trucks3.png");
+  background-image: url('../public/images/background.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   filter: blur(5px);
   z-index: -1;
+} 
+
+
+.helpme {
+  position: relative;
+  margin-left: auto;
+  margin-right: -75%;
+  width: 150%;
 }
 
 .carriers {
-  position: relative;
-  top: 16rem;
-  margin-bottom: 75px;
-  height: 410px;
-  width: 80%;
-  left: 10%;
+  position: absolute;
+  top: 20rem;
+  margin-bottom: 0%;
+  height: 450px;
+  /* width: 110% !important;
+  left: -5%; */
+  width: 65%;
+  left: 17.5%;
   overflow-y: auto;
   border-radius: 7px;
+  border: 2px solid black;
 }
 
 .carrier-table-head {
@@ -279,8 +213,6 @@
 .carriers table tr:hover {
   color: white;
   background-color: rgb(40, 193, 40) !important;
-  transform: scale(1.02); /* Scales the row to 105% of its original size */
-  transition: transform 0.3s ease; /* Smooth transition for the transform effect */
 }
 
 .carriers table tr:nth-of-type(even) {
@@ -308,11 +240,18 @@
 
 .slogan {
   text-align: center;
-  font-size: 35px;
-  margin-top: 5%;
+  font-size: 50px;
+  top: 60px;
   margin-bottom: -15%;
   font-weight: bold;
-  color: #000000;
+  color: #ffffff;
+  position:relative;
+  z-index: 2;
+
+}
+
+.highlight {
+  color: #00b62a; 
 }
 
 .mdb-input-group {
@@ -321,6 +260,7 @@
   justify-content: center;
   font-weight: bold;
   margin-top: 2%;
+
   width: fit-content;
   padding: 0;
   left: 213%;
@@ -360,4 +300,4 @@
   border: 0.5px solid black;
   transform: scale(1.04); /* Scales the row to 105% of its original size */
   transition: transform 0.3s ease; /* Smooth transition for the transform effect */
-}
+} 
