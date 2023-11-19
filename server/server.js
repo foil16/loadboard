@@ -111,9 +111,9 @@ function calcScore(trucker, load) {
   if (load.price < gasprice) {
     profitscore = 0;
   } else if (load.price > gasprice) {
-    if (load.price > 1 * gasprice) {
+    if (load.price > 1.1 * gasprice) {
       profitscore = 2;
-    } else if (load.price > 1.2 * gasprice) {
+    } else if (load.price > 1.15 * gasprice) {
       profitscore = 3;
     } else {
       profitscore = 1;
@@ -129,14 +129,12 @@ function calcScore(trucker, load) {
     ) * 1.3;
 
   if (deadhead < (1 / 2) * load.mileage) {
-    deadheadscore = 1;
-  } else if (deadhead < (1 / 3) * load.mileage) {
+    deadgeadscore = 3;
+  } else if (deadhead < (2 / 3) * load.mileage) {
     deadheadscore = 2;
-  } else if (deadhead < (1 / 4) * load.mileage) {
-    deadheadscore = 3;
-  } else {
-    deadheadscore = 0;
-  }
+  } else if (deadhead < load.mileage) {
+    deadheadscore = 1;
+  } else deadheadscore = 0;
 
   score = 1.5 * profitscore + deadheadscore;
 
