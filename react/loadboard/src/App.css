@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Ensures padding doesn't add to the width/height */
+  box-sizing: border-box; 
   font-family: "Open Sans", sans-serif;
 }
 
@@ -24,11 +24,11 @@
 }
 
 .popup {
-  display: none; /* Hidden by default */
+  display: none; 
   position: fixed;
   left: 50%;
   top: 50%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.5); 
   z-index: 999;
 }
 
@@ -37,8 +37,8 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
-  z-index: 1002; /* Higher than the popup content */
-  position: absolute; /* Ensure it's positioned relative to the popup */
+  z-index: 1002; 
+  position: absolute; 
   left: 470px;
 }
 
@@ -62,7 +62,7 @@
   border-radius: 10px;
   z-index: 1000;
   cursor: move;
-  overflow: hidden; /* Hide overflow from pseudo-element */
+  overflow: hidden; 
 }
 
 .table-details::before {
@@ -74,7 +74,7 @@
   bottom: 0;
   background-color: #f9f9f9d3;
   filter: blur(5px);
-  z-index: -1; /* Ensure it's behind the content */
+  z-index: -1; 
 }
 
 .vehicle-info-name,
@@ -83,62 +83,70 @@
   padding: 10px 15px;
   font-weight: bold;
   position: relative;
-  z-index: 1; /* Above the pseudo-element */
+  z-index: 1; 
 }
 
 /* -----------------------------------------------*/
 
 .caption-for-available-table {
   position: relative;
-  left: 320px;
-  top: 100px;
+  left: 45%;
+  top: 63px;
   font-weight: bold;
   font-size: 25px;
   color: black;
+  margin-bottom: 20px; 
+  z-index: 2;
 }
 
 .temp-available {
-  width: 50%;
+  width: 100%;
   position: relative;
   left: 70px;
-  top: 100px;
-  height: 600px;
+  border: 3px solid #00b62a;
+  height: 630px;
   overflow-y: auto;
   text-align: center;
-  background-color: white; /* Assuming the table container's background is white */
-  padding-bottom: 10px; /* Add padding to contain the shadows */
+  background-color: white; 
+  padding-bottom: 10px; 
+  border-radius: 10px;
+  vertical-align: auto;
 }
 
 .available-loads-table {
   width: 98%;
+  margin-top: 50px;
   margin-left: 0;
-  border-collapse: separate; /* Ensures that the cells have space for the box-shadow */
-  border-spacing: 0; /* Removes the default spacing between cells */
+  border-collapse: separate; 
+  border-spacing: 0; 
+  border-radius: 10px;
+  z-index: 1;
 }
 
 .available-loads-table thead {
   height: 60%;
   background-color: #000000;
   color: #ffffff;
+  font-size: 15px;
 }
 
 .available-loads-table thead th {
   position: sticky;
-  top: 0; /* This ensures the header sticks to the top of the table scroll area */
-  z-index: 10; /* This ensures the header stays on top of other content when scrolling */
-  background-color: #000000; /* Reapply background color to ensure readability */
+  top: 0; 
+  z-index: 10; 
+  background-color: #000000; 
   color: #ffffff;
 }
 
 .available-loads-table td th {
-  padding-top: 5px; /* Space on top of cell content */
-  padding-bottom: 5px; /* Space on bottom of cell content */
+  padding-top: 5px; 
+  padding-bottom: 5px; 
 }
 
 .help2,
 .help1 {
   border: 2px solid black;
-  background-clip: padding-box; /* Prevents background from spilling into the box-shadow */
+  background-clip: padding-box; 
   height: 60px;
   transition: transform 0.3s ease, border-width 0.3s ease;
 }
@@ -147,89 +155,103 @@
   height: 50px;
 }
 
-/* If the table background isn't white, match the box-shadow color to the actual background */
+.help2:nth-of-type(even) {
+  background-color: rgb(249, 249, 249);
+}
+
+.help2:nth-of-type(odd) {
+  background-color: rgb(246, 246, 246);
+}
+
+
 .temp-available {
-  background-color: white; /* Assuming the table container's background is white */
+  background-color: white; 
 }
 
 .help2:hover {
-  color: #00b62a; /* Your existing hover text color */
-  transform: scale(1.05); /* Scales the row to 105% of its original size */
-  transition: transform 0.3s ease; /* Smooth transition for the transform effect */
-  border-width: 3px; /* Increase the border width when hovered */
+  color: #00b62a; 
+  transform: scale(1.03); 
+  transition: transform 0.3s ease; 
+  border-width: 3px; 
 }
 
 .available-loads-table td,
 .available-loads-table th {
-  padding-top: 5px; /* Space on top of cell content */
-  padding-bottom: 5px; /* Space on bottom of cell content */
-  /* Add padding to the left and right to ensure content does not touch the borders */
+  padding-top: 5px; 
+  padding-bottom: 5px; 
   padding-left: 10px;
   padding-right: 10px;
 }
 
-.notifications ul {
-  display: flex;
-  flex-direction: column;
+
+
+
+
+
+
+
+.notif-table {
+  width: 98%;
 }
 
-.notifications li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  vertical-align: center;
-  width: 90%;
-  border: 2px solid black;
-  margin-top: 5px;
+.notif-table thead tr{
+  text-align: center;
+  height: 50px;
+  background-color: black;
+  color: white;
+  font-size: 15px;
+}
+
+.notif-table tbody tr{
+  text-align: center;
   height: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
-  overflow-x: auto;
+  left:0;
+  right:0;
+  overflow:hidden;
+  color: black;
 }
 
-.notifications::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: ("react/loadboard/public/images/trucks2.png");
-  background-position: center;
-  background-size: cover;
-  filter: grayscale(1) blur(5px);
-  z-index: -1;
+.notif-table tbody tr:hover{
+  color: #00b62a; 
+  transform: scale(1.03); 
+  transition: transform 0.3s ease; 
+  border-width: 3px; 
+}
+
+.notif-table tbody tr:nth-of-type(even) {
+  background-color: rgb(249, 249, 249);
+}
+
+
+.notif-table tbody tr:nth-of-type(odd) {
+  background-color: rgb(246, 246, 246);
 }
 
 .notifications {
+  margin-top: 50px;
   position: relative;
-  top: -575px;
-  bottom: 600px;
-  left: 815px;
-  border: 2px solid black;
-  height: 625px;
-  width: 40%;
+  border: 3px solid #00b62a;
+  height: 630px;
+  width: 70%;
   overflow-y: scroll;
-  border-radius: 15px;
+  border-radius: 10px;
+  left: 150px;
+  z-index: 1;
+  background-color: white;
+  color: black;
 }
 
-.notifications li {
-  width: 85%;
+.notifications h2 {
   position: relative;
+  left: 35%;
+  top: 10px;
+  font-weight: bold;
+  font-size: 25px;
+  color: black;
+  margin-bottom: 20px; 
   z-index: 2;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #00b62a;
 }
 
-.notifications li:hover,
-.available-loads li:hover {
-  background-color: #00b62a;
-  color: #ffffff;
-}
 
 .bgimage {
   position: relative;
