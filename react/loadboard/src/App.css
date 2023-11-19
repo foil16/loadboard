@@ -5,16 +5,12 @@
   font-family: "Open Sans", sans-serif;
 }
 
-.border-top {
-  border: 1px solid rgb(199, 199, 199);
-  margin-top: 70px;
-}
-
 .top-background {
   background-color: #ffffff;
 }
 
 .details-button {
+  display: none;
   position: relative;
   font-weight: bold;
   left: 83.4%;
@@ -59,7 +55,7 @@
 
 .table-details {
   position: fixed;
-  border: 3px solid black;
+  border: 5px solid black;
   width: 500px;
   height: 350px;
   margin: auto;
@@ -90,53 +86,64 @@
   z-index: 1; /* Above the pseudo-element */
 }
 
-/* Additional styling for headers if applicable */
-th {
-  color: black;
-  text-align: center;
-  padding: 12px;
-}
+/* -----------------------------------------------*/
 
-.available-loads::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: ("react/loadboard/public/images/trucks1.png");
-  background-position: center top;
-  background-size: cover;
-  filter: grayscale(1) blur(5px);
-  z-index: -1;
-}
 
-.available-loads {
+.caption-for-available-table {
   position: relative;
-  top: 25px;
-  left: 50px;
-  border: 2px solid black;
-  height: 625px;
+  left: -35px;
+  font-weight: bold;
+}
+
+.temp-available {
   width: 50%;
-  overflow-y: scroll; /* Add vertical scrollbar when content overflows */
-  border-radius: 15px;
+  position: relative; 
+  left: 70px; 
+  top: 100px;
+  height: 300px;
+  overflow-y: auto;
+  text-align: center;
 }
 
-.available-loads li {
-  background-color: #ffffff;
-  position: relative;
-  z-index: 2; /* Higher than the pseudo-element */
-  color: #00b62a;
-  background-color: rgba(255, 255, 255, 0.8); /*80% opacity */
+.available-loads-table {
+  width: 90%;
+
 }
 
-.available-loads ul,
+.available-loads-tabletd th, .available-loads-tabletd td {
+  padding-top: 5px; /* Space on top of cell content */
+  padding-bottom: 5px; /* Space on bottom of cell content */
+}
+
+.help {
+  border: 2px solid black;
+}
+
+.help:hover {
+  background-color: rgb(182, 182, 182);
+  color: blue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 .notifications ul {
   display: flex;
   flex-direction: column;
 }
 
-.available-loads li,
+
 .notifications li {
   display: flex;
   flex-direction: row;
@@ -155,6 +162,7 @@ th {
   overflow-x: auto;
 }
 
+
 .notifications::before {
   content: "";
   position: absolute;
@@ -171,32 +179,25 @@ th {
 
 .notifications {
   position: relative;
+  top: -575px;
   bottom: 600px;
   left: 815px;
   border: 2px solid black;
   height: 625px;
   width: 40%;
-  overflow-y: scroll; /* Add vertical scrollbar when content overflows */
+  overflow-y: scroll; /* Add vertical scrollbar when content overflows 
   border-radius: 15px;
 }
 
 .notifications li {
   width: 85%;
   position: relative;
-  z-index: 2; /* Ensure higher than the pseudo-element */
-  background-color: rgba(255, 255, 255, 0.8); /*80% opacity */
+  z-index: 2; /* Ensure higher than the pseudo-element 
+  background-color: rgba(255, 255, 255, 0.8); /*80% opacity 
   color: #00b62a;
 }
 
-.available-loads h2,
-.notifications h2 {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 18px;
-  color: #ffffff;
-  text-shadow: -1px -1px 0 #fba200, 1px -1px 0 #fba200, -1px 1px 0 #fba200,
-    1px 1px 0 #fba200;
-}
+
 
 .notifications li:hover,
 .available-loads li:hover {
@@ -204,82 +205,140 @@ th {
   color: #ffffff;
 }
 
-.carriers h2 {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 18px;
-  color: #ffffff;
-  text-shadow: -1px -1px 0 #fba200, 1px -1px 0 #fba200, -1px 1px 0 #fba200,
-    1px 1px 0 #fba200;
+
+
+
+
+.bgimage {
+  position: relative;
+  min-height: 100vh; /* Set the minimum height 
+  z-index: 1;
+  overflow: hidden;
+}
+*/
+.bgimage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url("C:\Users\ipman\Desktop\coding\loadboard\react\loadboard\public\images\trucks3.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(0%) blur(5px);
+  z-index: -1;
 }
 
 .carriers {
   position: relative;
-  top: 2rem;
-  height: 430px;
-  width: 100%;
-  overflow-y: scroll; /* Add vertical scrollbar when content overflows */
-  border-radius: 15px;
+  top: 16rem;
+  margin-bottom: 75px;
+  height: 410px;
+  width: 80%;
+  left: 10%;
+  overflow-y: auto; 
+  border-radius: 7px;
 }
 
-.carriers li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  vertical-align: center;
-  border: 2px solid black;
-  margin-top: 5px;
-  height: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
-  overflow-x: auto;
-  width: 85%;
-  position: relative;
-  z-index: 2; /* Ensure higher than the pseudo-element */
-  background-color: rgba(255, 255, 255, 0.8); /*80% opacity */
-  color: #00b62a;
+.carrier-table-head {
+  background-color: #000000;
+  position: sticky;
+  top: 0;
+  z-index: 10; 
 }
+
+.carriers table {
+  position: relative;
+  width: 100%;
+}
+
+
+.carriers table tr:hover {
+  color:white;
+  background-color: rgb(40, 193, 40) !important;
+}
+
+.carriers table tr:nth-of-type(even) {
+ 
+  background-color: rgba(230, 230, 230, 0.2); 
+}
+.carriers table tr:nth-of-type(odd) {
+
+  background-color: rgba(208, 208, 208, 0.7); 
+}
+
+
+.carriers table tr {
+  width: 100%;
+  height: 10px;
+  text-align: center;
+  color:black;
+}
+
+.carrier-table-head {
+  text-align: center;
+  color: #ffffff;
+}
+
+.newCarrier {
+  text-align: center;
+}
+
 
 .slogan {
   text-align: center;
   font-size: 35px;
-  margin-top: 10%;
+  margin-top: 5%;
   margin-bottom: -15%;
+  font-weight: bold;
+  color: #000000;
+}
+
+.mdb-input-group {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-weight: bold;
+  margin-top: 2%; 
+ 
+  width: fit-content; 
+  padding: 0; 
+  left: 213%;
+  top: 230px;
+  background-color: white; 
+  border-radius: 4px;
+
 }
 
 .select-trucker {
-  /* Align the search bar and button horizontally */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  margin-top: 17%;
-  margin-bottom: 0;
-}
-
-#select-trucker {
-  padding: 10px;
-  margin-right: 5px;
   font-size: 16px;
-  border: 1px solid #ddd;
   border-radius: 4px;
-  width: 250px; /* Or any desired width */
+  width: 250px; 
+  background-color: white; 
 }
 
-#search-button {
+.search-button {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   padding: 10px 20px;
-  background-color: #5cb85c;
+  width: 100px; 
+  background-color: #00b62a;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px; 
+  height: 36px;
 }
 
-#search-button:hover {
-  background-color: #4cae4c; /* Slightly darker shade for hover effect */
+.search-icon {
+  font-size: 14px; 
 }
+
+.search-button:hover {
+  background-color: rgb(24, 166, 24);
+  border: 0.5px solid black;
+} 
