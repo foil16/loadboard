@@ -49,7 +49,7 @@ const TableNotif = ({ truckId }) => {
         </thead>
         <tbody>
           {notifications.map((notif, index) => (
-            <tr key={notif._id || index}> {/* Use notif._id if available for uniqueness */}
+            <tr key={index}> {/* Use notif._id if available for uniqueness */}
               <td>{notif.truckerId}</td>
               <td>{notif.loadId}</td>
             </tr>
