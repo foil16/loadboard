@@ -10,6 +10,10 @@ function Home() {
   const [allNotifications, setAllNotifications] = useState([]);
 
   const handleTruckSelect = (truckId) => {
+    if (truckId !== selectedTruckId) {
+      // If a different truck is selected, clear the previous notifications
+      setAllNotifications([]); // Clear notifications from previous selection
+    }
     setSelectedTruckId(truckId);
     setShowDetails(true);
   };
@@ -45,17 +49,13 @@ function Home() {
         <div
           className="w-1/2"
           style={{ display: showDetails ? "block" : "none" }}
-        ></div>
+        >
+          <TableNotif truckId={selectedTruckId} data={filteredNotifications} />
+        </div>
         {showDetails && (
-          <>
-            <TableNotif
-              truckId={selectedTruckId}
-              data={filteredNotifications}
-            />
-            <button className="back-button" onClick={handleBack}>
-              Back
-            </button>
-          </>
+          <button className="back-button" onClick={handleBack}>
+            Back
+          </button>
         )}
       </div>
     </div>
