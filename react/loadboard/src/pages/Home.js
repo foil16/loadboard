@@ -7,41 +7,42 @@ import RealTimeTable from '../components/table';
 
 function Home() {
   const [selectedTruckId, setSelectedTruckId] = useState(null);
+  const [activeComponent, setActiveComponent] = useState('notifications'); // 'notifications' or 'loads'
 
   const handleTruckSelect = (truckId) => {
     setSelectedTruckId(truckId);
+    setActiveComponent('notifications'); // Show notifications first when a truck is selected
   };
 
-  const handleBackButtonClick = () => {
-    setSelectedTruckId(null);
+  const toggleActiveComponent = () => {
+    setActiveComponent(prev => (prev === 'notifications' ? 'loads' : 'notifications'));
   };
 
   return (
-    <div className="bgimage">
+    <div>
       <Navigation color="black" />
       <p className="slogan">Revolutionizing the Road, One Load at a Time</p>
       <div className="select-trucker">
         <Searchbar />
       </div>
-      <div className="mt-4 flex justify-around items-start">
-        {selectedTruckId ? (
-          <>
-            <div className="flex-1 max-w-md">
-              <TableLoad truckId={selectedTruckId} />
-            </div>
-            <div className="flex-1 max-w-md">
-              <TableNotif truckId={selectedTruckId} />
-            </div>
-            <button 
-              className="fixed top-4 left-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={handleBackButtonClick}
-            >
-              Back to Truck Selection
-            </button>
-          </>
-        ) : (
+      <div className="flex flex-row mt-4">
+        <div className="w-1/2">
           <RealTimeTable onTruckSelect={handleTruckSelect} />
-        )}
+        </div>
+        <div className="w-1/2">
+          {selectedTruckId && (
+            <>
+              {activeComponent === 'notifications' && <TableNotif truckId={selectedTruckId} />}
+              {activeComponent === 'loads' && <TableLoad truckId={selectedTruckId} />}
+              <button 
+                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={toggleActiveComponent}
+              >
+                {activeComponent === 'notifications' ? 'Show Loads' : 'Show Notifications'}
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

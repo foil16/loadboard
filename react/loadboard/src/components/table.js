@@ -65,11 +65,8 @@ const RealTimeTable = ({ onTruckSelect }) => {
             </thead>
             <tbody>
             {data.map((item) => (
-                <tr
-                key={item._id || item.truckId}
-                className="hover:bg-gray-100 cursor-pointer"
-                onClick={() => onTruckSelect(item.truckId)}
-              >
+              <tr key={item._id || item.truckId} onClick={() => handleRowClick(item.truckId)}>
+                {/* ... */}
                   <td className="newCarrier">
                     {item.truckId}
                   </td>
