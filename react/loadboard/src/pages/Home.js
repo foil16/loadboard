@@ -29,7 +29,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navigation color="black" />
-      <p className="slogan text-center">
+      <p className="slogan">
         Revolutionizing the Road,<br></br>
         One <span class="highlight">Load</span> at a Time
       </p>
