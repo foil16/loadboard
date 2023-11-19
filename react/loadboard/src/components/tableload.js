@@ -45,57 +45,57 @@ const TableLoad = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4 text-center">
+    <div className="available-loads">
+      <h2 className="caption-for-available-table">
         Available Loads
       </h2>
-      <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+      <div className="temp-available">
+        <table className="available-loads-table">
+          <thead>
+            <tr className="help1">
+              <th>
                 Load ID
               </th>
-              <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+              <th>
                 Equipment Type
               </th>
-              <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+              <th>
                 Mileage
               </th>
-              <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+              <th>
                 Price
               </th>
-              <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+              <th>
                 Latitude
               </th>
-              <th className="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+              <th>
                 Longitude
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 bg-white">
+          <tbody>
             {data.map((item) => (
               <tr
                 key={item._id || item.truckId}
-                className="hover:bg-gray-100 cursor-pointer"
-                onClick={() => handleRowClick(item.truckId)}
+                className="help2"
+                
               >
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <td>
                   {item.loadId}
                 </td>
-                <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
+                <td>
                   {item.equipmentType}
                 </td>
-                <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
+                <td>
                   {item.mileage}
                 </td>
-                <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
+                <td>
                   {item.price}
                 </td>
-                <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
+                <td>
                   {item.originLatitude}
                 </td>
-                <td className="px-6 py-4 text-gray-500 whitespace-nowrap">
+                <td>
                   {item.originLongitude}
                 </td>
               </tr>

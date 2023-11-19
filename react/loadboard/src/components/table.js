@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import Navigation from "./navbar";
 
@@ -100,3 +102,4 @@ const RealTimeTable = ({ onTruckSelect }) => {
 };
 
 export default RealTimeTable;
+
