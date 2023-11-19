@@ -16,7 +16,7 @@ const TableLoad = () => {
       try {
         const messageData = JSON.parse(event.data);
         if (messageData.type === "Load" || messageData.type === "End") {
-          console.log("Message received:", messageData);
+          //console.log("Message received:", messageData);
           if (messageData.type === "End") {
             console.log("End of day detected");
             setData([]); // Clear the data

@@ -90,8 +90,11 @@
 
 .caption-for-available-table {
   position: relative;
-  left: -35px;
+  left: 320px;
+  top: 100px;
   font-weight: bold;
+  font-size: 25px;
+  color: black;
 }
 
 .temp-available {
@@ -99,36 +102,76 @@
   position: relative;
   left: 70px;
   top: 100px;
-  height: 300px;
+  height: 600px;
   overflow-y: auto;
   text-align: center;
+  background-color: white; /* Assuming the table container's background is white */
+  padding-bottom: 10px; /* Add padding to contain the shadows */
 }
 
 .available-loads-table {
-  width: 90%;
+  width: 98%;
+  margin-left: 0;
+  border-collapse: separate; /* Ensures that the cells have space for the box-shadow */
+  border-spacing: 0; /* Removes the default spacing between cells */
 }
 
-.available-loads-tabletd th,
-.available-loads-tabletd td {
+.available-loads-table thead {
+  height: 60%;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.available-loads-table thead th {
+  position: sticky;
+  top: 0; /* This ensures the header sticks to the top of the table scroll area */
+  z-index: 10; /* This ensures the header stays on top of other content when scrolling */
+  background-color: #000000; /* Reapply background color to ensure readability */
+  color: #ffffff;
+}
+
+.available-loads-table td th {
   padding-top: 5px; /* Space on top of cell content */
   padding-bottom: 5px; /* Space on bottom of cell content */
 }
 
-.help {
+.help2,
+.help1 {
   border: 2px solid black;
+  background-clip: padding-box; /* Prevents background from spilling into the box-shadow */
+  height: 60px;
+  transition: transform 0.3s ease, border-width 0.3s ease;
 }
 
-.help:hover {
-  background-color: rgb(182, 182, 182);
-  color: blue;
+.help1 {
+  height: 50px;
 }
 
-/* 
+/* If the table background isn't white, match the box-shadow color to the actual background */
+.temp-available {
+  background-color: white; /* Assuming the table container's background is white */
+}
+
+.help2:hover {
+  color: #00b62a; /* Your existing hover text color */
+  transform: scale(1.05); /* Scales the row to 105% of its original size */
+  transition: transform 0.3s ease; /* Smooth transition for the transform effect */
+  border-width: 3px; /* Increase the border width when hovered */
+}
+
+.available-loads-table td,
+.available-loads-table th {
+  padding-top: 5px; /* Space on top of cell content */
+  padding-bottom: 5px; /* Space on bottom of cell content */
+  /* Add padding to the left and right to ensure content does not touch the borders */
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .notifications ul {
   display: flex;
   flex-direction: column;
 }
-
 
 .notifications li {
   display: flex;
@@ -147,7 +190,6 @@
   padding-right: 15px;
   overflow-x: auto;
 }
-
 
 .notifications::before {
   content: "";
@@ -171,19 +213,17 @@
   border: 2px solid black;
   height: 625px;
   width: 40%;
-  overflow-y: scroll; /* Add vertical scrollbar when content overflows 
+  overflow-y: scroll;
   border-radius: 15px;
 }
 
 .notifications li {
   width: 85%;
   position: relative;
-  z-index: 2; /* Ensure higher than the pseudo-element 
-  background-color: rgba(255, 255, 255, 0.8); /*80% opacity 
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
   color: #00b62a;
 }
-
-
 
 .notifications li:hover,
 .available-loads li:hover {
@@ -191,17 +231,13 @@
   color: #ffffff;
 }
 
-
-
-
-
 .bgimage {
   position: relative;
-  min-height: 100vh; /* Set the minimum height 
+  min-height: 100vh;
   z-index: 1;
   overflow: hidden;
 }
-*/
+
 .bgimage::before {
   content: "";
   position: absolute;
@@ -213,7 +249,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: grayscale(0%) blur(5px);
+  filter: blur(5px);
   z-index: -1;
 }
 
@@ -243,6 +279,8 @@
 .carriers table tr:hover {
   color: white;
   background-color: rgb(40, 193, 40) !important;
+  transform: scale(1.02); /* Scales the row to 105% of its original size */
+  transition: transform 0.3s ease; /* Smooth transition for the transform effect */
 }
 
 .carriers table tr:nth-of-type(even) {
@@ -283,7 +321,6 @@
   justify-content: center;
   font-weight: bold;
   margin-top: 2%;
-
   width: fit-content;
   padding: 0;
   left: 213%;
@@ -321,4 +358,6 @@
 .search-button:hover {
   background-color: rgb(24, 166, 24);
   border: 0.5px solid black;
+  transform: scale(1.04); /* Scales the row to 105% of its original size */
+  transition: transform 0.3s ease; /* Smooth transition for the transform effect */
 }
