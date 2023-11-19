@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import { useParams } from "react-router-dom";
 
 const TableNotif = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate(); // Initialize navigate function
-  const { truckId } = useParams();
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:4001/");
 
