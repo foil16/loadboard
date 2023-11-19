@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import TableLoad from '../components/tableload';
 import TableNotif from '../components/tablenotifs';
 import Navigation from '../components/navbar';
-import Searchbar from '../components/search';
 import RealTimeTable from '../components/table';
 
 function Home() {
@@ -26,13 +25,13 @@ function Home() {
   };
 
   return (
+    
     <div className="min-h-screen bg-gray-100">
       <Navigation color="black" />
-      <p className="slogan text-center">Revolutionizing the Road, One Load at a Time</p>
-      <div className="select-trucker">
-        <Searchbar />
-      </div>
-
+      <p className="slogan text-center">
+  Revolutionizing the Road,<br></br>
+  One <span class="highlight">Load</span> at a Time
+</p>
       <div className="flex justify-center items-start mt-4">
         <div className="w-full" style={{ display: showDetails ? 'none' : 'block' }}>
           <RealTimeTable onTruckSelect={handleTruckSelect} />
