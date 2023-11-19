@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-const TableNotif = () => {
-  const [data, setData] = useState([]);
-  const navigate = useNavigate(); // Initialize navigate function
+const TableNotif = ({ truckId }) => {
+  const [notifications, setNotifications] = useState([]);
+
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:4001/");
 
@@ -12,10 +12,14 @@ const TableNotif = () => {
 
     socket.onmessage = (event) => {
       try {
-        const message = JSON.parse(event.data);
-        // Filter out messages that are not notifications or don't match the truckId
-        if (message.type === "Notification" && message.truckId.toString() === truckId) {
-          setNotifications((prevNotifications) => [...prevNotifications, message]);
+        const messageData = JSON.parse(event.data);
+        if (messageData.type === "Notification") {
+          // Check if the notification's truckId matches the passed truckId
+          if (messageData.truckerId === truckId) {
+            setNotifications((prevNotifications) => [...prevNotifications, messageData]);
+          }
+        } else if (messageData.type === "End") {
+          setNotifications([]); // Clear the data if it's the end of the day
         }
       } catch (error) {
         console.error("Error parsing message data:", error);
@@ -26,16 +30,16 @@ const TableNotif = () => {
       console.error("WebSocket Error:", error);
     };
 
-    // Clean up the WebSocket connection when the component unmounts
+    // Clean up the WebSocket connection when the component unmounts or truckId changes
     return () => {
       console.log("Closing WebSocket connection");
       socket.close();
     };
-  }, [truckId]); // This effect should run when truckId changes
+  }, [truckId]); // Depend on truckId so that the effect runs again if truckId changes
 
   return (
-    <div>
-      <h2>Notifications for Truck ID: {truckId}</h2>
+    <div className="carriers">
+      <h2>Notifications</h2>
       <table>
         <thead>
           <tr>
@@ -44,10 +48,10 @@ const TableNotif = () => {
           </tr>
         </thead>
         <tbody>
-          {notifications.map((notification, index) => (
-            <tr key={index}>
-              <td>{notification.truckId}</td>
-              <td>{notification.loadId}</td>
+          {notifications.map((notif, index) => (
+            <tr key={notif._id || index}> {/* Use notif._id if available for uniqueness */}
+              <td>{notif.truckerId}</td>
+              <td>{notif.loadId}</td>
             </tr>
           ))}
         </tbody>
