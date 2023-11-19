@@ -111,9 +111,9 @@ function calcScore(trucker, load) {
   if (load.price < gasprice) {
     profitscore = 0;
   } else if (load.price > gasprice) {
-    if (load.price > 1.1 * gasprice) {
+    if (load.price > 1 * gasprice) {
       profitscore = 2;
-    } else if (load.price > 1.25 * gasprice) {
+    } else if (load.price > 1.2 * gasprice) {
       profitscore = 3;
     } else {
       profitscore = 1;
