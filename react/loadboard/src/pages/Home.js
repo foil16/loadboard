@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import TableLoad from '../components/tableload';
 import TableNotif from '../components/tablenotifs';
 import Navigation from '../components/navbar';
-import Searchbar from '../components/search';
 import RealTimeTable from '../components/table';
 
 function Home() {
@@ -30,7 +29,6 @@ function Home() {
       <Navigation color="black" />
       <p className="slogan text-center">Revolutionizing the Road, One Load at a Time</p>
       <div className="select-trucker">
-        <Searchbar />
       </div>
 
       <div className="flex justify-center items-start mt-4">
