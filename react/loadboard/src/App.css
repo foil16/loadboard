@@ -88,7 +88,6 @@
 
 /* -----------------------------------------------*/
 
-
 .caption-for-available-table {
   position: relative;
   left: -35px;
@@ -97,8 +96,8 @@
 
 .temp-available {
   width: 50%;
-  position: relative; 
-  left: 70px; 
+  position: relative;
+  left: 70px;
   top: 100px;
   height: 300px;
   overflow-y: auto;
@@ -107,10 +106,10 @@
 
 .available-loads-table {
   width: 90%;
-
 }
 
-.available-loads-tabletd th, .available-loads-tabletd td {
+.available-loads-tabletd th,
+.available-loads-tabletd td {
   padding-top: 5px; /* Space on top of cell content */
   padding-bottom: 5px; /* Space on bottom of cell content */
 }
@@ -123,19 +122,6 @@
   background-color: rgb(182, 182, 182);
   color: blue;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 
 .notifications ul {
@@ -223,7 +209,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url("C:\Users\ipman\Desktop\coding\loadboard\react\loadboard\public\images\trucks3.png");
+  background-image: ("react/loadboard/public/images/trucks3.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -238,7 +224,7 @@
   height: 410px;
   width: 80%;
   left: 10%;
-  overflow-y: auto; 
+  overflow-y: auto;
   border-radius: 7px;
 }
 
@@ -246,7 +232,7 @@
   background-color: #000000;
   position: sticky;
   top: 0;
-  z-index: 10; 
+  z-index: 10;
 }
 
 .carriers table {
@@ -254,27 +240,23 @@
   width: 100%;
 }
 
-
 .carriers table tr:hover {
-  color:white;
+  color: white;
   background-color: rgb(40, 193, 40) !important;
 }
 
 .carriers table tr:nth-of-type(even) {
- 
-  background-color: rgba(230, 230, 230, 0.2); 
+  background-color: rgba(230, 230, 230, 0.2);
 }
 .carriers table tr:nth-of-type(odd) {
-
-  background-color: rgba(208, 208, 208, 0.7); 
+  background-color: rgba(208, 208, 208, 0.7);
 }
-
 
 .carriers table tr {
   width: 100%;
   height: 10px;
   text-align: center;
-  color:black;
+  color: black;
 }
 
 .carrier-table-head {
@@ -286,7 +268,6 @@
   text-align: center;
 }
 
-
 .slogan {
   text-align: center;
   font-size: 35px;
@@ -297,48 +278,47 @@
 }
 
 .mdb-input-group {
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  margin-top: 2%; 
- 
-  width: fit-content; 
-  padding: 0; 
+  margin-top: 2%;
+
+  width: fit-content;
+  padding: 0;
   left: 213%;
   top: 230px;
-  background-color: white; 
+  background-color: white;
   border-radius: 4px;
-
 }
 
 .select-trucker {
   font-size: 16px;
   border-radius: 4px;
-  width: 250px; 
-  background-color: white; 
+  width: 250px;
+  background-color: white;
 }
 
 .search-button {
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px 20px;
-  width: 100px; 
+  width: 100px;
   background-color: #00b62a;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 15px; 
+  font-size: 15px;
   height: 36px;
 }
 
 .search-icon {
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 .search-button:hover {
   background-color: rgb(24, 166, 24);
   border: 0.5px solid black;
-} 
+}
