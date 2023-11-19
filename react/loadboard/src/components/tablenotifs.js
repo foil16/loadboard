@@ -38,9 +38,9 @@ const TableNotif = ({ truckId }) => {
   }, [truckId]); // Depend on truckId so that the effect runs again if truckId changes
 
   return (
-    <div className="carriers">
+    <div className="notifications">
       <h2>Notifications</h2>
-      <table>
+      <table className="notif-table">
         <thead>
           <tr>
             <th>Truck ID</th>
@@ -49,7 +49,7 @@ const TableNotif = ({ truckId }) => {
         </thead>
         <tbody>
           {notifications.map((notif, index) => (
-            <tr key={index}> {/* Use notif._id if available for uniqueness */}
+            <tr key={index} className="notif-rows"> {/* Use notif._id if available for uniqueness */}
               <td>{notif.truckerId}</td>
               <td>{notif.loadId}</td>
             </tr>

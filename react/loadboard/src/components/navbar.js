@@ -25,4 +25,3 @@ function Navigation({ color }) {
 }
 
 export default Navigation;
-
