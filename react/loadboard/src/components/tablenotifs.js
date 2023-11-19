@@ -16,7 +16,10 @@ const TableNotif = ({ truckId }) => {
         if (messageData.type === "Notification") {
           // Check if the notification's truckId matches the passed truckId
           if (messageData.truckerId === truckId) {
-            setNotifications((prevNotifications) => [...prevNotifications, messageData]);
+            setNotifications((prevNotifications) => [
+              ...prevNotifications,
+              messageData,
+            ]);
           }
         } else if (messageData.type === "End") {
           setNotifications([]); // Clear the data if it's the end of the day
@@ -45,13 +48,17 @@ const TableNotif = ({ truckId }) => {
           <tr>
             <th>Truck ID</th>
             <th>Load ID</th>
+            <th>Message</th>
           </tr>
         </thead>
         <tbody>
           {notifications.map((notif, index) => (
-            <tr key={index} className="notif-rows"> {/* Use notif._id if available for uniqueness */}
+            <tr key={index} className="notif-rows">
+              {" "}
+              {/* Use notif._id if available for uniqueness */}
               <td>{notif.truckerId}</td>
               <td>{notif.loadId}</td>
+              <td>{notif.message}</td>
             </tr>
           ))}
         </tbody>
