@@ -92,6 +92,69 @@ function getDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+function calcScore(trucker, load) {
+  let score = null;
+  let profitscore = null;
+  let deadheadscore = null;
+
+  const gasprice =
+    (getDistance(
+      trucker.positionLatitude,
+      trucker.positionLongitude,
+      load.originLatitude,
+      load.originLongitude
+    ) *
+      1.3 +
+      load.mileage) *
+    1.38;
+
+  if (load.price < gasprice) {
+    profitscore = 0;
+  } else if (load.price > gasprice) {
+    if (load.price > 1.1 * gasprice) {
+      profitscore = 2;
+    } else if (load.price > 1.25 * gasprice) {
+      profitscore = 3;
+    } else {
+      profitscore = 1;
+    }
+  }
+
+  const deadhead =
+    getDistance(
+      trucker.positionLatitude,
+      trucker.positionLongitude,
+      load.originLatitude,
+      load.originLongitude
+    ) * 1.3;
+
+  if (deadhead < (1 / 2) * load.mileage) {
+    deadheadscore = 1;
+  } else if (deadhead < (1 / 3) * load.mileage) {
+    deadheadscore = 2;
+  } else if (deadhead < (1 / 4) * load.mileage) {
+    deadheadscore = 3;
+  } else {
+    deadheadscore = 0;
+  }
+
+  score = 1.5 * profitscore + deadheadscore;
+
+  let message = null;
+
+  if (profitscore - 2 >= deadheadscore) {
+    message = "Very profitable load.";
+  } else if (deadheadscore - 2 >= profitscore) {
+    message = "Short distance.";
+  } else if (profitscore != 0 && score > 1.5) {
+    message = "Viable load.";
+  } else {
+    message = "Ignore";
+  }
+
+  return message;
+}
+
 async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
   const query = { equipType: load.equipmentType };
   const relevantTruckersTemp = await truckers.find(query).toArray();
@@ -106,16 +169,33 @@ async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
     return trucker.nextTripLengthPreference === pref;
   });
 
+  // const relevantTruckersTemp2 = relevantTruckersTemp1.filter(() => {
+  //   return calcScore(trucker, load)[1] != "Ignore";
+  // });
+
   const relevantTruckersTemp2 = relevantTruckersTemp1.filter((trucker) => {
-    return (
-      getDistance(
-        trucker.positionLatitude,
-        trucker.positionLongitude,
-        load.originLatitude,
-        load.originLongitude
-      ) <= 100
-    );
+    return calcScore(trucker, load) != "Ignore";
   });
+
+  // const relevantTruckersTemp3 = relevantTruckersTemp2.filter((trucker) => {
+  //   return trucker[1] != "Ignore";
+  // });
+
+  return relevantTruckersTemp2;
+
+  //const relevantTruckersTemp2 = ;
+
+  // const relevantTruckersTemp2 = relevantTruckersTemp1.filter((trucker) => {
+  //   return (
+  //     getDistance(
+  //       trucker.positionLatitude,
+  //       trucker.positionLongitude,
+  //       load.originLatitude,
+  //       load.originLongitude
+  //     ) <= 100
+  //   );
+  // });
+
   // const distance1 = getDistance(
   //   trucker.positionLatitude,
   //   trucker.positionLongitude,
@@ -125,14 +205,20 @@ async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
   // const timetravelled = (distance1 * 1.35 + load.mileage) * 1.2;
   // const estimatedsalary = timetravelled * 30;
 
-  return relevantTruckersTemp;
+  //return relevantTruckersTemp3;
 }
 
-async function uploadNotification(loadIdi, truckerIdi, notifications) {
+async function uploadNotification(
+  loadIdi,
+  truckerIdi,
+  notifications,
+  messaget
+) {
   const notification = {
     type: "Notification",
     loadId: loadIdi,
     truckerId: truckerIdi,
+    message: messaget,
   };
   notifications.insertOne(notification);
   broadcastNotifications(notification);
@@ -186,9 +272,13 @@ mqttClient.on("message", async (topic, message) => {
         collectiont,
         collectionn
       );
+
+      console.log(relevantTruckers);
       broadcastNewLoad(data);
       relevantTruckers.forEach((trucker) => {
-        uploadNotification(loadId, trucker.truckId, collectionn);
+        const msg = calcScore(trucker, data);
+
+        uploadNotification(loadId, trucker.truckId, collectionn, msg);
       });
     }
     //await collection.insertOne(data);
