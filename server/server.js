@@ -106,16 +106,17 @@ async function getRelevantTruckersForLoad(load, db, truckers, notifications) {
     return trucker.nextTripLengthPreference === pref;
   });
 
-  const relevantTruckersTemp2 = relevantTruckersTemp1.filter((trucker) => {
-    return (
-      getDistance(
-        trucker.positionLatitude,
-        trucker.positionLongitude,
-        load.originLatitude,
-        load.originLongitude
-      ) <= 100
-    );
-  });
+  // const relevantTruckersTemp2 = relevantTruckersTemp1.filter((trucker) => {
+  //   return (
+  //     getDistance(
+  //       trucker.positionLatitude,
+  //       trucker.positionLongitude,
+  //       load.originLatitude,
+  //       load.originLongitude
+  //     ) <= 100
+  //   );
+  // });
+
   // const distance1 = getDistance(
   //   trucker.positionLatitude,
   //   trucker.positionLongitude,
