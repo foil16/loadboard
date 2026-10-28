@@ -1,9 +1,10 @@
+require("dotenv").config();
+
 //________________________________MongoDB
 
 const { MongoClient } = require("mongodb");
 
-const uri =
-  "mongodb+srv://USER:PASSWORD@your-cluster.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
 async function connectDB() {
@@ -39,10 +40,9 @@ async function connectDB() {
 //________________________________MQTT
 const mqtt = require("mqtt");
 
-const mqttClient = mqtt.connect("mqtt://fortuitous-welder.cloudmqtt.com", {
-  port: 1883,
-  username: "CodeJamUser",
-  password: "REDACTED",
+const mqttClient = mqtt.connect(process.env.MQTT_URL, {
+  username: process.env.MQTT_USERNAME,
+  password: process.env.MQTT_PASSWORD,
   cleanSession: true,
   //   QoS: 1,
   clientId: "goat",
