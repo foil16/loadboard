@@ -10,8 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
     "express": "^4.18.2",
+    "mongodb": "^6.2.0",
     "mongoose": "^8.0.1",
-    "mqtt": "^5.2.2"
+    "mqtt": "^5.2.2",
+    "ws": "^8.14.2"
   }
 }
